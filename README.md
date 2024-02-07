@@ -20,7 +20,7 @@ Put the documents.jsonl file from teams into `data/`
 
 To load all the documents into typesense, run
 ```bash
-docker-compose exec app python import_documents.py
+docker-compose exec app python scripts/import_documents.py
 ```
 
 You should now be able to visit the dashboard at
