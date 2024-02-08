@@ -4,11 +4,8 @@ import typesense
 def create_collection(client):
     try:
         client.collections['routines'].delete()
-        print("Old collection deleted!")
     except Exception as e:
-        print("No old collection found!")
         pass
-    print("Creating new collection!")
     client.collections.create({
         "name": "routines",
         "fields": [
@@ -28,7 +25,8 @@ def create_collection(client):
 
 def import_documents(client):
     with open('data/documents.jsonl') as jsonl_file:
-        print(client.collections['routines'].documents.import_(jsonl_file.read().encode('utf-8'), {'action': 'create'}))
+        client.collections['routines'].documents.import_(jsonl_file.read().encode('utf-8'), {'action': 'create'})
+        print("Import successful!")
 
 def main():
     client = typesense.Client({
@@ -40,13 +38,8 @@ def main():
     }],
     'connection_timeout_seconds': 500
     })
-    print("Creating collection!")
     create_collection(client)
-    print("Collection Created! Importing documents!")
     import_documents(client)
-    print("Documents imported!")
 
 if __name__ == "__main__":
     main()
-
-
