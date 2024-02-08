@@ -7,18 +7,27 @@ Simple install with docker
 ```bash
 mkdir $(pwd)/typesense-data
 ```
-2. Run the build command
+
+2. Load documents
+
+Create a data directory
+
+```bash
+mkdir $(pwd)/data
+```
+
+Put the documents.jsonl file from teams into the newly created directory
+
+3. Run the build command
 ```bash
 docker-compose up -d --build
 ```
 
 You will now have two docker containers running, the app and typesense.
 
-3. Load documents
+4. Load documents
 
-Put the documents.jsonl file from teams into `data/`
-
-To load all the documents into typesense, run
+Then run the following command to load the documents.jsonl into the typesense service.
 ```bash
 docker-compose exec app python scripts/import_documents.py
 ```
